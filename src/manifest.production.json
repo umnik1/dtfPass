@@ -1,0 +1,24 @@
+{
+    "manifest_version": 2,
+    "name": "DTFPass",
+    "description": "Extention for DTF",
+    "version": "0.0.1",
+    "browser_action": {
+        "default_popup": "popup.html"
+    },
+    "permissions":[
+        "https://.dtf.ru/"],
+    "content_scripts": [{
+        "matches": [
+         "*://*.dtf.ru/*"
+        ],
+        "js": [
+         "js/content.js"
+        ],
+        "run_at": "document_end"
+        }],
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+    "web_accessible_resources": [
+            "js/hd.js"
+        ]
+}

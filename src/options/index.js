@@ -1,8 +1,11 @@
-import Vue from 'vue'
-import root from './root.vue'
-Vue.config.productionTip = false
-/* eslint-disable no-new */
+import Vue from "vue";
+import AppComponent from "./App/App.vue";
+
+Vue.component("app-component", AppComponent);
+
 new Vue({
-  el: '#root',
-  render: h => h(root)
-})
+  el: "#app",
+  render: createElement => {
+    return createElement(AppComponent);
+  }
+});

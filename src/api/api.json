@@ -1,0 +1,16 @@
+{
+    "public": {
+      "sign": "pub/sign.json"
+    },
+    "agenda": {
+      "add": "agenda/add.json",
+      "update": "agenda/update.json",
+      "remove": "agenda/delete.json",
+      "finish": "agenda/finish.json",
+      "remind": "agenda/remind.json",
+      "list": {
+        "focus": "agenda/list/todo.json"
+      }
+    }
+  }
+  
