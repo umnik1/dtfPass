@@ -30,6 +30,16 @@
               </el-radio-group>
               <small class="ct">(Все посты / Блоги / Подсайты)</small>
             </el-col>
+            <el-col :span="15">
+              <p class="pt-10"><b>Отображение кол-ва закладок</b></p>
+            </el-col>
+            <el-col :span="14">
+              <el-radio-group @change="setSetting('bookmarks')" v-model="bookmarks" size="small" class="ct">
+                <el-radio-button label="Включено"></el-radio-button>
+                <el-radio-button label="Выключено"></el-radio-button>
+              </el-radio-group>
+              <small class="ct">(Внутри поста)</small>
+            </el-col>
           </el-row>
         </el-card>
   </el-container> 
@@ -49,7 +59,8 @@ export default {
     profile: "",
     hd: "",
     download: "",
-    splitter: ""
+    splitter: "",
+    bookmarks: ""
   }),
   created() {
     chrome.storage.local.get(["hd"], result => {
@@ -71,6 +82,13 @@ export default {
         this.splitter = "Включено";
       } else {
         this.splitter = "Выключено";
+      }
+    });
+    chrome.storage.local.get(["bookmarks"], result => {
+      if (result.bookmarks) {
+        this.bookmarks = "Включено";
+      } else {
+        this.bookmarks = "Выключено";
       }
     });
   },

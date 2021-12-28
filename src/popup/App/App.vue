@@ -2,34 +2,29 @@
   <!-- Tabs -->
   <div>
     <el-tabs type="border-card">
-      <el-tab-pane label="常用链接">
+      <el-tab-pane label="Профиль">
+        <profile />
+      </el-tab-pane>
+      <el-tab-pane label="Настройки">
         <settings />
       </el-tab-pane>
-      <el-tab-pane label="常用工具">
-        <common-tools />
-      </el-tab-pane>
-      <el-tab-pane label="角色管理">
-        <user-manage />
-      </el-tab-pane>
-      <el-tab-pane label="待办事项">
-        <todo-list> </todo-list>
+      <el-tab-pane label="Чёрный список">
+        <blacklist />
       </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 
 <script>
-import TodoList from "@/pages/TodoList.vue";
 import Settings from "@/pages/Settings.vue";
-import CommonTools from "@/pages/CommonTools.vue";
-import UserManage from "@/pages/UserManage.vue";
+import Profile from "@/pages/Profile.vue";
+import Blacklist from "@/pages/Blacklist.vue";
 export default {
   name: "app",
   components: {
     Settings,
-    CommonTools,
-    TodoList,
-    UserManage
+    Profile,
+    Blacklist
   },
   data() {}
 };

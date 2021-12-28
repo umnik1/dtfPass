@@ -34,6 +34,35 @@ injectScript(content, function() {
       document.body.appendChild(script);
     }
   });
+
+  // When Splitter - on
+  chrome.storage.local.get(["splitter"], result => {
+    if (result.splitter) {
+      content = chrome.extension.getURL("js/splitter.js");
+      script = document.createElement("script");
+      script.setAttribute("type", "text/javascript");
+      script.setAttribute("src", content);
+      document.body.appendChild(script);
+    }
+  });
+
+  // When Bookmarks - on
+  chrome.storage.local.get(["bookmarks"], result => {
+    if (result.bookmarks) {
+      content = chrome.extension.getURL("js/bookmarks.js");
+      script = document.createElement("script");
+      script.setAttribute("type", "text/javascript");
+      script.setAttribute("src", content);
+      document.body.appendChild(script);
+    }
+  });
+
+  //Backlist
+  content = chrome.extension.getURL("js/backlist.js");
+  script = document.createElement("script");
+  script.setAttribute("type", "text/javascript");
+  script.setAttribute("src", content);
+  document.body.appendChild(script);
 });
 
 function injectScript(src, callback) {
