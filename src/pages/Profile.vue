@@ -1,6 +1,6 @@
 <template lang="pug">
   <el-container>
-        <el-card class="full" shadow="always">
+        <el-card class="full" shadow="none" style="border: none;">
             <div v-if="!check_token">
             <center>
                 <b>Введите свой токен, чтобы получить информацию по своему профилю</b>

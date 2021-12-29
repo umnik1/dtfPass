@@ -58,11 +58,36 @@ injectScript(content, function() {
   });
 
   //Backlist
-  content = chrome.extension.getURL("js/backlist.js");
-  script = document.createElement("script");
-  script.setAttribute("type", "text/javascript");
-  script.setAttribute("src", content);
-  document.body.appendChild(script);
+  chrome.storage.local.get(["blacklist_check"], result => {
+    if (result.blacklist_check) {
+
+      chrome.storage.local.get(["postBlack"], result => {
+        if (result.postBlack) {
+          var file = document.createElement("input");
+          file.setAttribute("type", "hidden");
+          file.setAttribute("value", result.postBlack);
+          file.setAttribute("class", "postBlacklist");
+          document.getElementById("page_wrapper").appendChild(file);
+        }
+      });
+
+      chrome.storage.local.get(["commentBlack"], result => {
+        if (result.commentBlack) {
+          var file = document.createElement("input");
+          file.setAttribute("type", "hidden");
+          file.setAttribute("value", result.commentBlack);
+          file.setAttribute("class", "commentBlacklist");
+          document.getElementById("page_wrapper").appendChild(file);
+        }
+      });
+
+      content = chrome.extension.getURL("js/blacklist.js");
+      script = document.createElement("script");
+      script.setAttribute("type", "text/javascript");
+      script.setAttribute("src", content);
+      document.body.appendChild(script);
+    }
+  });
 });
 
 function injectScript(src, callback) {

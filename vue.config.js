@@ -20,6 +20,18 @@ const plugins =
         {
           from: path.resolve("src/manifest.production.json"),
           to: `${path.resolve("dist")}/manifest.json`
+        },
+        {
+          from: path.resolve("src/content/libs/"),
+          to: `${path.resolve("dist")}/js/`
+        },
+        {
+          from: path.resolve("src/content/insert/"),
+          to: `${path.resolve("dist")}/js/`
+        },
+        {
+          from: path.resolve("src/assets/css/"),
+          to: `${path.resolve("dist")}/css/`
         }
       ]
     : [

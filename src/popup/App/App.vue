@@ -12,6 +12,7 @@
         <blacklist />
       </el-tab-pane>
     </el-tabs>
+    <p><center><b>DTFPass</b> by <a href="https://dtf.ru/u/52199" target="_blank" style="color: #409eff;">Maksim Chingin</a></center></p>
   </div>
 </template>
 

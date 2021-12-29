@@ -14,7 +14,7 @@ $(document).ready(function(){
           <div class="tab-box" id="tab3C"></div>
         `;
         if ($('#tabs').length == 0) {
-          $(tabs).insertBefore( $( ".feed" ) );
+          $(tabs).insertBefore( $( ".ui-sorting" ) );
           $('#tabs li a:not(:first)').addClass('inactive');
           $('.tab-box').hide();
           $('.tab-box:first').show();

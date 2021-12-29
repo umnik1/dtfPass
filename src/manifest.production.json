@@ -3,22 +3,28 @@
     "name": "DTFPass",
     "description": "Extention for DTF",
     "version": "0.0.1",
+    "options_page": "options.html",
     "browser_action": {
         "default_popup": "popup.html"
     },
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
     "permissions":[
-        "https://.dtf.ru/"],
+        "https://dtf.ru/*",
+        "*://*.osnova.io/*",
+        "unlimitedStorage",
+        "storage"],
     "content_scripts": [{
         "matches": [
-         "*://*.dtf.ru/*"
+         "*://*.dtf.ru/*",
+         "*://*.osnova.io/*"
         ],
         "js": [
          "js/content.js"
         ],
+        "css": ["css/pass.css"],
         "run_at": "document_end"
         }],
-    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
-    "web_accessible_resources": [
-            "js/hd.js"
+        "web_accessible_resources": [
+            "js/*"
         ]
 }

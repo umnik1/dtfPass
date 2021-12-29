@@ -1,11 +1,11 @@
 <template lang="pug">
   <el-container>
-   <el-tabs v-model="activeName" @tab-click="handleClick">
+   <el-tabs v-model="activeName" class="full" @tab-click="handleClick">
     <el-tab-pane label="Посты" name="first">
       <el-card shadow="always" class="full">
-        <center><small>Вставляйте ID пользователей, чтобы скрыть их посты из ленты.</small></center>
+        <center><small>Вставляйте ID пользователей, чтобы скрыть их <b>посты</b> из ленты.</small></center>
         <el-divider></el-divider>
-        <el-tag :key="tag" v-for="tag in dynamicTags" closable :disable-transitions="false" @close="handleClose(tag)">
+        <el-tag :key="tag" v-for="tag in dynamicTagsPosts" closable :disable-transitions="false" @close="handleClose(tag, 'post')">
           <o>{{ tag }}</o>
         </el-tag>
         <el-input class="input-new-tag" v-if="inputVisible" v-model="inputValue" ref="saveTagInput" size="mini" @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm">
@@ -13,7 +13,18 @@
         <el-button v-else class="button-new-tag" size="small" @click="showInput">+ Добавить пользователя</el-button>
       </el-card>
     </el-tab-pane>
-    <el-tab-pane label="Комментарии" name="second">Комментарии</el-tab-pane>
+    <el-tab-pane label="Комментарии" name="second">
+      <el-card shadow="always" class="full">
+        <center><small>Вставляйте ID пользователей, чтобы скрыть их <b>комментарии</b> из ленты.</small></center>
+        <el-divider></el-divider>
+        <el-tag :key="tag" v-for="tag in dynamicTagsComments" closable :disable-transitions="false" @close="handleClose(tag, 'comment')">
+          <o>{{ tag }}</o>
+        </el-tag>
+        <el-input class="input-new-tag" v-if="inputVisible" v-model="inputValue" ref="saveTagInput" size="mini" @keyup.enter.native="handleInputConfirmComment" @blur="handleInputConfirmComment">
+        </el-input>
+        <el-button v-else class="button-new-tag" size="small" @click="showInput">+ Добавить пользователя</el-button>
+      </el-card>
+    </el-tab-pane>
   </el-tabs>
 
   </el-container> 
@@ -22,30 +33,48 @@
 export default {
   name: "Blacklist",
   data: () => ({
-    dynamicTags: ["Tag 1", "Tag 2", "Tag 3"],
+    dynamicTagsPosts: [],
+    dynamicTagsComments: [],
     inputVisible: false,
     inputValue: "",
     activeName: "first"
   }),
   created() {
-    //
+    chrome.storage.local.get(["postBlack"], result => {
+      if (result.postBlack) {
+        this.dynamicTagsPosts = result.postBlack;
+      }
+    });
+    chrome.storage.local.get(["commentBlack"], result => {
+      if (result.commentBlack) {
+        this.dynamicTagsComments = result.commentBlack;
+      }
+    });
   },
   methods: {
-    setSetting(type) {
-      let val = "";
-      if (this[type] === "Включено") {
-        val = true;
+    saveBlacklist(type) {
+      if (type === "postBlack") {
+        chrome.storage.local.set({ [type]: this.dynamicTagsPosts }, () => {
+          console.log("Recorded");
+        });
       } else {
-        val = false;
+        chrome.storage.local.set({ [type]: this.dynamicTagsComments }, () => {
+          console.log("Recorded");
+        });
       }
-
-      chrome.storage.local.set({ [type]: val }, () => {
-        console.log("Recorded");
-      });
     },
 
-    handleClose(tag) {
-      this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+    handleClose(tag, type) {
+      if (type === "post") {
+        this.dynamicTagsPosts.splice(this.dynamicTagsPosts.indexOf(tag), 1);
+        this.saveBlacklist("postBlack");
+      } else {
+        this.dynamicTagsComments.splice(
+          this.dynamicTagsComments.indexOf(tag),
+          1
+        );
+        this.saveBlacklist("commentBlack");
+      }
     },
 
     showInput() {
@@ -59,10 +88,21 @@ export default {
     handleInputConfirm() {
       let inputValue = this.inputValue;
       if (inputValue) {
-        this.dynamicTags.push(inputValue);
+        this.dynamicTagsPosts.push(inputValue);
       }
       this.inputVisible = false;
       this.inputValue = "";
+      this.saveBlacklist("postBlack");
+    },
+
+    handleInputConfirmComment() {
+      let inputValue = this.inputValue;
+      if (inputValue) {
+        this.dynamicTagsComments.push(inputValue);
+      }
+      this.inputVisible = false;
+      this.inputValue = "";
+      this.saveBlacklist("commentBlack");
     }
   }
 };
