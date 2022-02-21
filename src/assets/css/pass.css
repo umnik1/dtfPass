@@ -24,10 +24,7 @@
   }
   
   #tabs {
-    width: 100%;
-    height: 30px;
-    padding-right: 2px;
-    margin-top: 30px;
+    z-index: 9;
   }
   
   a {
@@ -75,8 +72,6 @@
     clear: both;
     width: 100%;
     text-align: left;
-    padding-top: 20px;
-  
   }
   
   .tab-box h2 {
@@ -116,3 +111,73 @@
     font-size: 16px;
     line-height: 1.5em;
   }
+
+.pass-dropdown {
+  position: relative;
+  display: block;
+  float: right;
+  margin: 4px 12px 0 0;
+}
+
+.pass-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+  --main-offset: 6px;
+    --search-bottom-offset: 4px;
+    --scrollbar-offset: 8px;
+    --item-offset-left: 10px;
+    --item-offset-right: 18px;
+    --item-gap: 4px;
+    --text-color: #000;
+    font-size: 16px;
+    line-height: 1.5em;
+    background-color: #fff;
+    -webkit-box-shadow: 0 4px 8px rgb(0 0 0 / 6%), 0 0 1px rgb(0 0 0 / 25%);
+    box-shadow: 0 4px 8px rgb(0 0 0 / 6%), 0 0 1px rgb(0 0 0 / 25%);
+    border-radius: 8px;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    position: absolute;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    max-width: 400px;
+    color: var(--text-color);
+}
+
+.pass-dropdown:hover .pass-dropdown-content {
+  display: flex;
+}
+
+#tabs a {
+  --color-background: transparent;
+  --icon-size: 22px;
+  --icon-offset: 10px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: var(--item-offset-left);
+  padding-right: var(--item-offset-right);
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: var(--color-background);
+  cursor: pointer;
+  border-radius: 6px;
+  outline: 0;
+}
+
+#tabs a:hover {
+  --color-background: rgba(0,0,0,0.05);
+}
+
+.bookmarks_return {
+  color: #595959;
+}

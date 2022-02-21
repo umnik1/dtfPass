@@ -1,30 +1,35 @@
 $(document).ready(function(){
     var activeSide = '';
     var refreshIntervalId = setInterval(function() {
-      if(window.location.href.indexOf("/u/") != -1 || window.location.href.indexOf("/all") != -1
+      if(window.location.href.indexOf("/popular") != -1 || window.location.href.indexOf("/all") != -1
       || window.location.href.indexOf("/new") != -1) {
         var tabs = `
-          <ul id="tabs">
-              <li><a id="tab1">Все посты</a></li>
-              <li><a id="tab2">Блог</a></li>
-              <li><a id="tab3">Подсайты</a></li>
-          </ul>
+          <div class="pass-dropdown">
+            <span id="pass-splitter">Все посты</span>
+            <div id="tabs" class="pass-dropdown-content">
+              <a id="tab1">Все посты</a>
+              <a id="tab2">Блог</a>
+              <a id="tab3">Подсайты</a>
+            </div>
+          </div>
           <div class="tab-box" id="tab1C"></div>
           <div class="tab-box" id="tab2C"></div>
           <div class="tab-box" id="tab3C"></div>
         `;
         if ($('#tabs').length == 0) {
-          $(tabs).insertBefore( $( ".ui-sorting" ) );
+          $('.ui-filters').css('float', 'left');
+          $(tabs).insertAfter( $( ".ui-filters" ) );
           $('#tabs li a:not(:first)').addClass('inactive');
           $('.tab-box').hide();
           $('.tab-box:first').show();
               
-          $('#tabs li a').click(function(){
+          $('#tabs a').click(function(){
+            $('#pass-splitter').text($(this).text());
             $(".content-feed").removeClass("moved");
             var t = $(this).attr('id');
             activeSide = t;
             if($(this).hasClass('inactive')){ //this is the start of our condition 
-                $('#tabs li a').addClass('inactive');           
+                $('#tabs a').addClass('inactive');           
                 $(this).removeClass('inactive');
                 
                 $('.tab-box').hide();

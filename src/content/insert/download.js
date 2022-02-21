@@ -2,7 +2,7 @@ $(document).ready(function() {
   // Скачивание
   setInterval(function() {
     // Изображения
-    $("img").each(function() {
+    $(".andropov_image__inner img").each(function() {
       if (!$(this).hasClass("downloadbl")) {
         var link = this.src;
         link = link.split("/");

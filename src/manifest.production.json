@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "DTFPass",
     "description": "Extention for DTF",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "options_page": "options.html",
     "browser_action": {
         "default_popup": "popup.html"
@@ -11,8 +11,12 @@
     "permissions":[
         "https://dtf.ru/*",
         "*://*.osnova.io/*",
-        "unlimitedStorage",
         "storage"],
+    "icons": { 
+        "48": "icons/icon48.png",
+        "96": "icons/icon96.png",
+        "128": "icons/icon128.png"
+        },
     "content_scripts": [{
         "matches": [
          "*://*.dtf.ru/*",

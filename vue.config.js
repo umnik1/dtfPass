@@ -32,6 +32,10 @@ const plugins =
         {
           from: path.resolve("src/assets/css/"),
           to: `${path.resolve("dist")}/css/`
+        },
+        {
+          from: path.resolve("src/content/icons/"),
+          to: `${path.resolve("dist")}/icons/`
         }
       ]
     : [
@@ -50,6 +54,10 @@ const plugins =
         {
           from: path.resolve("src/assets/css/"),
           to: `${path.resolve("dist")}/css/`
+        },
+        {
+          from: path.resolve("src/content/icons/"),
+          to: `${path.resolve("dist")}/icons/`
         }
       ];
 
